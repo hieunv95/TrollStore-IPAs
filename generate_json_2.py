@@ -72,17 +72,17 @@ if __name__ == "__main__":
     args = parser.parse_args()
     token = args.token
 
-    with open("apps.json", "r") as f:
+    with open("apps_2.json", "r") as f:
         data = json.load(f)
 
-    if os.path.exists("bundleId.csv"):
-        df = pd.read_csv("bundleId.csv")
+    if os.path.exists("bundleId2.csv"):
+        df = pd.read_csv("bundleId2.csv")
     else:
         df = pd.DataFrame(columns=["name", "bundleId"])
 
     md_df = None
-    if os.path.exists("README.md"):
-        with open("README.md", "r", encoding="utf-8") as f:
+    if os.path.exists("README_2.md"):
+        with open("README_2.md", "r", encoding="utf-8") as f:
             raw_md = f.read()
         html = mistletoe.markdown(raw_md)
         soup = BeautifulSoup(html, "html.parser")
@@ -142,10 +142,10 @@ if __name__ == "__main__":
                 }
             )
 
-    df.to_csv("bundleId.csv", index=False)
+    df.to_csv("bundleId2.csv", index=False)
 
-    with open("apps_esign.json", "w") as json_file:
+    with open("apps_esign_2.json", "w") as json_file:
         json.dump(data, json_file, indent=2)
 
-    with open("apps.json", "w") as file:
+    with open("apps_2.json", "w") as file:
         json.dump(transform_object(data), file, indent=2)
